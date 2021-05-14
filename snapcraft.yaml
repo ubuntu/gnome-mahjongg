@@ -1,5 +1,5 @@
 name: gnome-mahjongg
-version: git
+adopt-info: gnome-mahjongg
 summary: Match tiles and clear the board
 description: |
   A solitaire version of the classic Eastern tile game. Tiles are stacked on
@@ -36,6 +36,9 @@ parts:
   gnome-mahjongg:
     source: https://gitlab.gnome.org/GNOME/gnome-mahjongg.git
     source-type: git
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version $(git describe --tags --abbrev=10)
     override-build: |
       sed -i.bak -e 's|=org.gnome.Mahjongg$|=${SNAP}/meta/gui/org.gnome.Mahjongg.svg|g' data/org.gnome.Mahjongg.desktop.in
       snapcraftctl build
