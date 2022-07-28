@@ -11,11 +11,11 @@ description: |
 
   GNOME Mahjongg features a variety of starting layouts, some easy and some
   difficult. If you get stuck, you can ask for a hint, but this adds a large
-  time penalty.  
+  time penalty.
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
-base: core20
+base: core22
 
 slots:
   # for GtkApplication registration
@@ -24,10 +24,14 @@ slots:
     bus: session
     name: org.gnome.Mahjongg
 
+layout:
+  /usr/share/gnome-mahjongg:
+    symlink: $SNAP/usr/share/gnome-mahjongg
+
 apps:
   gnome-mahjongg:
     command: usr/bin/gnome-mahjongg
-    extensions: [ gnome-3-38 ]
+    extensions: [ gnome ]
     plugs:
       - gsettings
     desktop: usr/share/applications/org.gnome.Mahjongg.desktop
@@ -38,15 +42,17 @@ parts:
     source-type: git
     source-tag: '3.38.3'
     override-pull: |
-      snapcraftctl pull
-      snapcraftctl set-version $(git describe --tags --abbrev=10)
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=10)
+      patch -p1 < $CRAFT_PROJECT_DIR/patches/patch1.diff
     override-build: |
-      sed -i.bak -e 's|=org.gnome.Mahjongg$|=${SNAP}/meta/gui/org.gnome.Mahjongg.svg|g' $SNAPCRAFT_PART_SRC/data/org.gnome.Mahjongg.desktop.in
-      snapcraftctl build
-      mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui/
-      cp ../src/data/icons/hicolor/scalable/org.gnome.Mahjongg.svg $SNAPCRAFT_PART_INSTALL/meta/gui/
-      cp ../install/snap/gnome-mahjongg/current/usr/share/applications/org.gnome.Mahjongg.desktop $SNAPCRAFT_PART_INSTALL/meta/gui/
+      sed -i -e 's|=org.gnome.Mahjongg$|=${SNAP}/meta/gui/org.gnome.Mahjongg.svg|g' $CRAFT_PART_SRC/data/org.gnome.Mahjongg.desktop.in
+      craftctl default
+      mkdir -p $CRAFT_PART_INSTALL/meta/gui/
+      cp $CRAFT_PART_SRC/data/icons/hicolor/scalable/org.gnome.Mahjongg.svg $CRAFT_PART_INSTALL/meta/gui/
+      cp $CRAFT_PART_INSTALL/usr/share/applications/org.gnome.Mahjongg.desktop $CRAFT_PART_INSTALL/meta/gui/
     plugin: meson
-    meson-parameters: [--prefix=/snap/gnome-mahjongg/current/usr, -Dcompile-schemas=disabled, -Dupdate-icon-cache=disabled]
-    organize:
-      snap/gnome-mahjongg/current/usr: usr
+    meson-parameters:
+      - --prefix=/usr
+    build-packages:
+      - libc6-dev
