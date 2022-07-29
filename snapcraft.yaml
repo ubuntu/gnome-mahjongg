@@ -41,6 +41,7 @@ parts:
     source: https://gitlab.gnome.org/GNOME/gnome-mahjongg.git
     source-type: git
     source-tag: '3.38.3'
+    parse-info: [usr/share/metainfo/org.gnome.Mahjongg.appdata.xml]
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=10)
