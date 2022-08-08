@@ -55,5 +55,3 @@ parts:
     plugin: meson
     meson-parameters:
       - --prefix=/usr
-    build-packages:
-      - libc6-dev
