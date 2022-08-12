@@ -51,7 +51,6 @@ parts:
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/meta/gui/
       cp $CRAFT_PART_SRC/data/icons/hicolor/scalable/org.gnome.Mahjongg.svg $CRAFT_PART_INSTALL/meta/gui/
-      cp $CRAFT_PART_INSTALL/usr/share/applications/org.gnome.Mahjongg.desktop $CRAFT_PART_INSTALL/meta/gui/
     plugin: meson
     meson-parameters:
       - --prefix=/usr
