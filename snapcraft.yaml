@@ -17,6 +17,9 @@ grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
 base: core22
 
+build-snaps:
+  - gnome-42-2204/latest/candidate
+
 slots:
   # for GtkApplication registration
   gnome-mahjongg:
@@ -38,9 +41,11 @@ apps:
 
 parts:
   gnome-mahjongg:
+# ext:updatesnap
     source: https://gitlab.gnome.org/GNOME/gnome-mahjongg.git
     source-type: git
     source-tag: '3.38.3'
+    source-depth: 1
     parse-info: [usr/share/metainfo/org.gnome.Mahjongg.appdata.xml]
     override-pull: |
       craftctl default
