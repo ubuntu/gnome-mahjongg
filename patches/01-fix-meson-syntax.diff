@@ -97,12 +97,7 @@ diff --git a/meson.build b/meson.build
 index af43999..27e3b29 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1,26 +1,28 @@
- project ('gnome-mahjongg', ['vala', 'c'],
--         version: '3.38.3',
-+         version: '3.38.0',
-          license: 'GPLv3+',
-          default_options: [
+@@ -5,22 +5,24 @@
               'warning_level=1',
               'buildtype=debugoptimized',
           ],
@@ -449,8 +444,7 @@ index 2a14dc9..bceab91 100644
    </screenshots>
    <releases>
      <!-- should be kept in versionning inverted order -->
--    <release version="3.38.3" date="2020-11-01" type="stable" urgency="medium"/>
-+    <release version="3.38.0" date="2020-09-18" type="stable" urgency="medium"/>
+     <release version="3.38.3" date="2020-11-01" type="stable" urgency="medium"/>
    ​  <!-- release version="3.35.91" date="2020-02-15" type="development" urgency="low"/ -->
    </releases>
    <launchable type="desktop-id">org.gnome.Mahjongg.desktop</launchable>
