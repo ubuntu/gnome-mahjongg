@@ -41,7 +41,7 @@ parts:
 # ext:updatesnap
     source: https://gitlab.gnome.org/GNOME/gnome-mahjongg.git
     source-type: git
-    source-tag: '47.2'
+    source-tag: '48.0'
     source-depth: 1
     parse-info: [usr/share/metainfo/org.gnome.Mahjongg.metainfo.xml]
     override-build: |
